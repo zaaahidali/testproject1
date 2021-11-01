@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   post "new_task", to: "tasks#create"
 
+  get "admin_view", to: "businesses#admin_view"
   # resources :tasks
   root "home#index"
 end

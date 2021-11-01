@@ -31,7 +31,8 @@
     </div>
     
     <div class="field">
-    <%= form.label :Registered_businesses %><br />
+    <%= form.label :Registered_businesses %><br />  
+    <% form.select :"business_id", options_for_select(Business.all.pluck(:b_name)) %>
     <%= form.select :"business_id", options_for_select(Business.all.pluck(:id)) %>
     </div>
     

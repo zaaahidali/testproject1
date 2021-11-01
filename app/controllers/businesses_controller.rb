@@ -4,7 +4,8 @@ include Pundit
   # GET /businesses or /businesses.json
   def index
     @businesses = Business.all
-    
+    # @businesses = policy_scope(Business)
+    # authorize @businesses
   end
 
   # GET /businesses/1 or /businesses/1.json
@@ -14,6 +15,7 @@ include Pundit
   # GET /businesses/new
   def new
     @business = Business.new
+    authorize @business
   end
 
   # GET /businesses/1/edit
@@ -40,7 +42,7 @@ include Pundit
   # POST /businesses or /businesses.json
   def create
     @business = Business.new(business_params)
-
+    authorize @business
     respond_to do |format|
       if @business.save
         format.html { redirect_to @business, notice: "Business was successfully created." }
@@ -115,6 +117,10 @@ include Pundit
       params.require(:business).permit(:b_name, :description).merge(user_ids: params[:users][:id].reject(&:empty?))
       
     end
+
+
+  def admin_view
+  end
 
 
     
