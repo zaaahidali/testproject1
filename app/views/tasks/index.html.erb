@@ -1,0 +1,41 @@
+<center> <h1> Welcome to the tasks </h1> </center>
+
+
+
+<%= collection_select(:users, :id, User.all, :id, :name, {}, { :multiple => true }) %>  
+<%
+=begin%>
+ <%= Task.task_types.keys%> 
+<%
+=end%>
+  <%
+=begin%>
+ <div class="field">
+    <%= field.label :User_type %><br />
+    <%= field.select :user_type, Task.task_types.keys, autofocus: true, autocomplete: "" %>
+  </div>
+ 
+<%
+=end%>
+
+<%
+=begin%>
+ <h2> Sign Up </h2>
+
+
+<%= form_with(model: @business, local: true) do |f| %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <%= f.submit "Sign Up" %>
+
+<% end %>
+ 
+<%
+=end%>
+
+

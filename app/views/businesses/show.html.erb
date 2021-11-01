@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<div class="jumbotron">
+  <h1 class="display-4"> <%= @business.b_name %>: </h1>
+  <p class="lead"><%= @business.description %></p>
+  <hr class="my-4">
+  <p>  <strong>Team Members:</strong><%= @business.users.pluck(:name).join(", ")  %></p>
+  <%= link_to 'Edit', edit_business_path(@business), class:"btn btn-info" %> 
+  <%= link_to 'Back', businesses_path(@business), class:"btn btn-info" %> 
+</div>
+
+
+
+<%
+=begin%>
+ <p>
+  <strong>Business name:</strong>
+  <%= @business.b_name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @business.description %>
+</p>
+<p>
+  <strong>Team Members:</strong>
+  <%= @business.users.pluck(:name).join(", ")  %>
+</p>
+
+
+<%= link_to 'Edit', edit_business_path(@business) %> |
+<%= link_to 'Back', businesses_path %> 
+<%
+=end%>
