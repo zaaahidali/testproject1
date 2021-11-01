@@ -11,4 +11,11 @@ class User < ApplicationRecord
     }       
 
     has_and_belongs_to_many :businesses
+
+    #  Mapping integer values to string for pundit
+    after_initialize do
+      if self.new_record?
+        self.user_type ||= :admin
+      end
+    end
 end
