@@ -1,0 +1,12 @@
+<br/> <br />
+
+<% tasks.each do |item| %>
+    <div class="jumbotron">
+        <h1 class="display-4"><%= item.title %></h1>
+        <p class="lead"><strong>DATE:</strong>
+            <%= item.due_date %>
+        </p>
+    </div>
+<% end %>
+
+

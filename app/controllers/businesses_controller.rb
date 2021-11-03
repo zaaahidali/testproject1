@@ -1,19 +1,41 @@
 class BusinessesController < ApplicationController
   before_action :set_business, only: %i[ show edit update destroy ]
-include Pundit
+  before_action :authenticate_user! 
+  include Pundit
   # GET /businesses or /businesses.json
   def index
-    @businesses = Business.all
-    # @businesses = policy_scope(Business)
+    # @businesses = Business.all
+    # user.user_type
     # authorize @businesses
+    # @businesses = policy_scope(Business).order(b_name: :desc)
+    if current_user.user_type == 'admin'
+      # puts current_user
+      @businesses = Business.all
+    else
+      @businesses = current_user.businesses
+      # puts "abc"
+    end
   end
 
   # GET /businesses/1 or /businesses/1.json
   def show
   end
 
+  # admin view
+  def admin_view
+    if params[:business] && params[:business][:id].present?
+      # debugger
+      @business = Business.find(params[:business][:id])
+    else
+      @business = Business.first
+    end
+    @tasks = @business.tasks
+  end
+
+
   # GET /businesses/new
   def new
+    puts "========================================================="
     @business = Business.new
     authorize @business
   end
@@ -113,14 +135,11 @@ include Pundit
 
     # Only allow a list of trusted parameters through.
     def business_params
-      # byebug
+      
       params.require(:business).permit(:b_name, :description).merge(user_ids: params[:users][:id].reject(&:empty?))
       
     end
 
-
-  def admin_view
-  end
 
 
     

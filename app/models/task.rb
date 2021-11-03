@@ -4,4 +4,6 @@ class Task < ApplicationRecord
         bug: 1
       }       
   belongs_to :business
+  
 end
+  

@@ -1,30 +1,12 @@
 <center><h1> This is admin view </h1></center>
-<%
-=begin%>
- 
-<h1>Welcome to the tasks </h1>
-<%= form_with model: @businesses, url: new_task_path do |form| %>
-    <% if @businesses.errors.any? %>
-        <div id="error_explanation">
-            <h2><%= pluralize(@businesses.errors.count, "error") %> prohibited this @businesses from being saved:</h2>
-            <ul>
-                <% @businesses.errors.each do |error| %>
-                <li><%= error.full_message %></li>
-                <% end %>
-            </ul>
-        </div>
-    <% end %>
 
-    <div class="form-group">
-    
-    <div class="field">
-        <%= form.label :Registered_businesses %><br />  
-        <% form.select :"business_id", options_for_select(Business.all.pluck(:b_name)) %>
-        <%= form.select :"business_id", options_for_select(Business.all.pluck(:id)) %>
-    </div>
-    
-<div class="mb-3">
-    <%= form.submit "Create Task", class: "btn btn-primary" %>
-</div> 
-<%
-=end%>
+
+    <h1> Registered Business </h1>
+    <%= collection_select(:business, :id, Business.all, :id, :b_name, {}, data:{remote: true}) %> 
+
+    <div id="tasks">
+        <%= render "tasks/index", tasks: @tasks %>
+        
+    </div>    
+
+

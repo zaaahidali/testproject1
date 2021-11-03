@@ -12,10 +12,11 @@
     <% end %>
 
     <div class="form-group">
-    <%= form.text_field :title, class: "form-control", placeholder: "Enter task title" %>
+        <%= form.text_field :title, class: "form-control", placeholder: "Enter task title" %>
     </div>
     <div class="form-group">
-    <%= form.date_select :due_date, class: "form-control" %>
+        <%= form.label :Due_date %><br />
+        <%= form.date_select :due_date, class: "form-control" %>
     </div>
     <%
 =begin%>
@@ -26,20 +27,25 @@
 <%
 =end%>
     <div class="field">
-    <%= form.label :Task_type %><br />
-    <%= form.select :task_type, Task.task_types.keys, autofocus: true, autocomplete: "" %>
+        <%= form.label :Task_type %><br />
+        <%= form.select :task_type, Task.task_types.keys, autofocus: true, autocomplete: "" %>
     </div>
     
     <div class="field">
-    <%= form.label :Registered_businesses %><br />  
-    <% form.select :"business_id", options_for_select(Business.all.pluck(:b_name)) %>
-    <%= form.select :"business_id", options_for_select(Business.all.pluck(:id)) %>
+        <%= form.label :Registered_businesses %><br />  
+        <% form.select :"business_id", options_for_select(Business.all.pluck(:b_name)) %>
+        <%= form.select :business_id, Business.all.map { |b| [b.b_name, b.id] }, autofocus: true, autocomplete: "" %>
     </div>
     
 <div class="mb-3">
     <%= form.submit "Create Task", class: "btn btn-primary" %>
 </div>
 <% end %>
+
+<h1>Business Tasks</h1>
+<% render "index", tasks: @tasks %>
+
+
 <h1>Business Tasks</h1>
 <% if !@tasks.blank? %>
     <% for item in @tasks %>
@@ -53,4 +59,3 @@
       
     <% end %>
 <% end %>
-

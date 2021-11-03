@@ -5,9 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum user_type: {
-      admin: 10,
-      writing_broker: 20,
-      support: 30
+      admin: 0,
+      writing_broker: 1,
+      support: 2
     }       
 
     has_and_belongs_to_many :businesses
