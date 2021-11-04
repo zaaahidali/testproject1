@@ -4,6 +4,7 @@ class Task < ApplicationRecord
         bug: 1
       }       
   belongs_to :business
-  
+  validates :title, presence: true, uniqueness: true
+
 end
   

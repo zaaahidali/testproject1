@@ -67,7 +67,7 @@ class BusinessesController < ApplicationController
     authorize @business
     respond_to do |format|
       if @business.save
-        format.html { redirect_to @business, notice: "Business was successfully created." }
+        format.html { redirect_to @business, notice: "Business is successfully created." }
         format.json { render :show, status: :created, location: @business }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -83,7 +83,7 @@ class BusinessesController < ApplicationController
     authorize @business
     
     if @business.update(business_params)
-      flash[:notice] = "\"#{@business.b_name}\" HEHEHEHEHHEHEHHEHE Updated."
+      flash[:notice] = "\"#{@business.b_name}\" Business is successfully Updated."
       redirect_to @business
     else
       flash.now[:alert] = "There was an error Updating the Business."
@@ -110,7 +110,7 @@ class BusinessesController < ApplicationController
       authorize @business
       
       if @business.destroy
-        flash[:notice] = "\"#{@business.b_name}\" HEHEHEHEHHEHEHHEHE."
+        flash[:notice] = "\"#{@business.b_name}\" Business is successfully removed."
         redirect_to @business
       else
         flash.now[:alert] = "There was an error deleting the Business."
